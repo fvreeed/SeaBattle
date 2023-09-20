@@ -8,9 +8,8 @@ public class Player {
 
     RandomShip randomShip = new RandomShip();
 
-    public Sea playerSea() {
+    public void playerSea() {
         sea = randomShip.setShips(sea);
-        return sea;
     }
 
     public void setHealth(int health) {

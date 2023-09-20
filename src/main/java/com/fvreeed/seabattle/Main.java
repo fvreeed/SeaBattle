@@ -34,9 +34,16 @@ public class Main {
             ComputerMove computerMove = new ComputerMove();
 
             do {
-                playerMove.move(computer.sea);
-                computerMove.move(player.sea);
-            } while (player.getHealth() > 0 || computer.getHealth() > 0);
+                playerMove.move(computer.sea, computer);
+                computerMove.move(player.sea, player);
+                System.out.println();
+            } while (computer.getHealth() > 0 && player.getHealth() > 0);
+
+            if (player.getHealth() > 0) {
+                System.out.println("You win!");
+            } else {
+                System.out.println("You lose!");
+            }
         }
     }
 }

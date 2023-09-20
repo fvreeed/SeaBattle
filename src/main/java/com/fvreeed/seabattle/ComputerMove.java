@@ -12,7 +12,7 @@ public class ComputerMove {
 
     ArrayList<String> computerMoves = new ArrayList<>();
 
-    public void move(Sea sea) {
+    public void move(Sea sea, Player player) {
 
         int[] coordinates = randomCoordinates();
 
@@ -21,7 +21,9 @@ public class ComputerMove {
 
         if (sea.seaZone[x][y] == '+') {
             sea.seaZone[x][y] = 'X';
-            move(sea);
+            player.setHealth(player.getHealth() - 1);
+            if (player.getHealth() > 0)
+                move(sea, player);
         } else {
             sea.seaZone[x][y] = 'O';
         }

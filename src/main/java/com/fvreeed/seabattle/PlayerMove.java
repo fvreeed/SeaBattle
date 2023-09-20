@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class PlayerMove {
 
-    Computer computer = new Computer();
-
     Scanner scanner = new Scanner(System.in);
 
     GameBoard gameBoard = new GameBoard();
@@ -15,7 +13,7 @@ public class PlayerMove {
 
     ArrayList<String> playerMoves = new ArrayList<>();
 
-    public void move(Sea sea) {
+    public void move(Sea sea, Computer computer) {
         System.out.println("\n-------ENEMY SEA-------");
         gameBoard.drawBoard(computerSea);
         int[] coordinates = playerInput();
@@ -26,12 +24,13 @@ public class PlayerMove {
             sea.seaZone[x][y] = 'X';
             computerSea.seaZone[x][y] = 'X';
             computer.setHealth(computer.getHealth() - 1);
-            move(sea);
+            if (computer.getHealth() > 0)
+                move(sea, computer);
         } else {
             sea.seaZone[x][y] = 'O';
             computerSea.seaZone[x][y] = 'O';
-            gameBoard.drawBoard(computerSea);
         }
+        gameBoard.drawBoard(computerSea);
     }
 
     private int[] playerInput() {
@@ -86,7 +85,7 @@ public class PlayerMove {
         if (isValid && playerMoves.contains(input)) {
             System.out.println("You have already attacked here.");
             return false;
-        }  else {
+        } else {
             playerMoves.add(input);
         }
         if (!isValid)
